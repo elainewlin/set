@@ -26,9 +26,14 @@ class Card extends React.Component {
   }
 
   render() {
-    const {selected, card} = this.props;
-    const isSelected = includes(selected, card);
-    const className = isSelected ? "Card selected" : "Card";
+    const {isSelected, isHighlighted, card} = this.props;
+
+    let className = "Card";
+    if (isSelected) {
+      className = `${className} selected`;
+    } else if (isHighlighted) {
+      className = `${className} highlighted`;
+    }
 
     return (
       <div className={className} onClick={this.onClick}>
@@ -47,6 +52,7 @@ Card.propTypes = {
     id: PropTypes.string
   }),
   selectCard: PropTypes.func,
-  selected: PropTypes.array
+  isSelected: PropTypes.bool,
+  isHighlighted: PropTypes.bool
 }
 export default Card;

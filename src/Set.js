@@ -1,16 +1,16 @@
 /** SET specific logic */
-import {COLORS, FILLS, SHAPES, NUMBERS} from "./constants";
-import {shuffle} from 'lodash';
+import { COLORS, FILLS, SHAPES, NUMBERS } from "./constants";
+import { shuffle } from "lodash";
 
 const DECK = [];
 
-const PROPERTIES = ['color', 'fill', 'shape', 'number'];
+const PROPERTIES = ["color", "fill", "shape", "number"];
 for (const color of COLORS) {
   for (const fill of FILLS) {
     for (const shape of SHAPES) {
       for (const number of NUMBERS) {
-        const id = `${color}_${fill}_${shape}_${number}`
-        const card = {color, fill, shape, number, id};
+        const id = `${color}_${fill}_${shape}_${number}`;
+        const card = { color, fill, shape, number, id };
         DECK.push(card);
       }
     }
@@ -20,7 +20,7 @@ for (const color of COLORS) {
 const SHUFFLED_DECK = shuffle(DECK);
 
 /** Check if all values are the same */
-const isAllSame = (values) => {
+const isAllSame = values => {
   if (values.length === 0) return false;
   const value = values[0];
 
@@ -30,11 +30,11 @@ const isAllSame = (values) => {
     }
   }
   return true;
-}
+};
 
 /** Check if all values are different */
-const isAllDifferent = (values) => {
-  const seen = {}
+const isAllDifferent = values => {
+  const seen = {};
   for (let v of values) {
     if (v in seen) {
       return false;
@@ -42,14 +42,14 @@ const isAllDifferent = (values) => {
     seen[v] = true;
   }
   return true;
-}
+};
 
 /**
  * Given a set of 3 cards, check whether or not it's a set
  * @param cards: 3 cards
  * @returns boolean
  */
-const isSet = (cards) => {
+const isSet = cards => {
   for (let property of PROPERTIES) {
     const values = cards.map(c => c[`${property}`]);
     const valid = isAllSame(values) || isAllDifferent(values);
@@ -58,11 +58,6 @@ const isSet = (cards) => {
     }
   }
   return true;
-}
+};
 
-export {
-  SHUFFLED_DECK, 
-  isAllSame,
-  isAllDifferent,
-  isSet
-}
+export { SHUFFLED_DECK, isAllSame, isAllDifferent, isSet };

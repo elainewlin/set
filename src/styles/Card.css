@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   margin: 8px;
+  margin-left: 0;
 }
 
 .Shape {
@@ -16,5 +17,9 @@
 }
 
 .selected {
-  background: #FFFBBB;
+  background: #fffbbb;
+}
+
+.highlighted {
+  background: #ffdbbb;
 }
