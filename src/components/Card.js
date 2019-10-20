@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {COLORS, FILLS, SHAPES, NUMBERS} from "../constants";
 import '../styles/Card.css';
-import {includes} from "lodash";
+
 class Card extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ class Card extends React.Component {
   }
 
   render() {
-    const {isSelected, isHighlighted, card} = this.props;
+    const {isSelected, isHighlighted} = this.props;
 
     let className = "Card";
     if (isSelected) {

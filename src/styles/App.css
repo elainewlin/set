@@ -28,6 +28,12 @@
   flex-direction: column;
   flex-wrap: wrap;
   height: 472px;
-  align-items: flex-start;
+  align-content: flex-start;
+  flex: 1;
+  padding-bottom: 8px;
 }
 
+.RightPanel {
+  display: flex;
+  flex-direction: column;
+}

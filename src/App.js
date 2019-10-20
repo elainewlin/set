@@ -4,8 +4,14 @@ import "./styles/App.css";
 import { SHUFFLED_DECK, isSet } from "./Set";
 import { includes, remove } from "lodash";
 
-const CARDS_TO_DEAL = 12;
+const CARDS_ON_TABLE = 12;
 const CARDS_IN_SET = 3;
+
+const MESSAGES = {
+  INVALID_SET: "Not a set",
+  NO_SET_FOUND: "No set found on the board. Flip more cards.",
+  EMPTY_DECK: "No more cards in deck. Start a new game."
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +21,7 @@ class App extends React.Component {
       highlighted: [], // Computer finds a set
       deck: SHUFFLED_DECK,
       table: [],
-      error: false
+      message: null
     };
     this.selectCard = this.selectCard.bind(this);
     this.findSet = this.findSet.bind(this);
@@ -23,25 +29,33 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const table = this.state.deck.slice(0, CARDS_TO_DEAL);
+    const table = this.state.deck.slice(0, CARDS_ON_TABLE);
     this.setState({ table: table });
 
     const remainingDeck = this.state.deck.slice(
-      CARDS_TO_DEAL,
+      CARDS_ON_TABLE,
       this.state.deck.length
     );
     this.setState({ deck: remainingDeck });
   }
 
   replaceSelected(selected) {
-    const table = this.state.table.slice();
+    let table = this.state.table.slice();
     const deck = this.state.deck.slice();
 
+    // We flipped another row of cards.
+    if (table.length > CARDS_ON_TABLE) {
+      table = table.filter(card => !selected.includes(card));
+      return this.setState({table, deck});
+    }
+
     selected.forEach(card => {
-      const index = table.indexOf(card);
       const newCard = deck.pop();
+      const index = table.indexOf(card);
       table[index] = newCard;
     });
+    // Handle end of game when deck runs out of cards.
+    table = table.filter(card => !!card);
 
     this.setState({ table, deck });
   }
@@ -49,9 +63,9 @@ class App extends React.Component {
   validateSet(selected) {
     if (isSet(selected)) {
       this.replaceSelected(selected);
-      this.setState({ selected: [], error: false });
+      this.setState({ selected: [], message: null });
     } else {
-      this.setState({ selected: [], error: true });
+      this.setState({ selected: [], message: MESSAGES.INVALID_SET });
     }
   }
 
@@ -87,9 +101,9 @@ class App extends React.Component {
   }
 
   renderMessage() {
-    if (this.state.error) {
-      return <div className="Error">Not a set</div>;
-    }
+    const {message} = this.state;
+    if (!message) return;
+    return (<div>{message}</div>);
   }
 
   findSet() {
@@ -107,11 +121,22 @@ class App extends React.Component {
         }
       }
     }
+    // No available sets
+    this.setState({
+      selected: [],
+      message: MESSAGES.NO_SET_FOUND
+    })
   }
 
   flipMoreCards() {
     const table = this.state.table.slice();
     const deck = this.state.deck.slice();
+
+    if (deck.length === 0) {
+      return this.setState({
+        message: MESSAGES.EMPTY_DECK
+      })
+    }
 
     const numCardsToFlip = Math.min(3, deck.length);
     for (let i = 0; i < numCardsToFlip; i++) {
