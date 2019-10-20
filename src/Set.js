@@ -2,22 +2,25 @@
 import { COLORS, FILLS, SHAPES, NUMBERS } from "./constants";
 import { shuffle } from "lodash";
 
-const DECK = [];
-
 const PROPERTIES = ["color", "fill", "shape", "number"];
-for (const color of COLORS) {
-  for (const fill of FILLS) {
-    for (const shape of SHAPES) {
-      for (const number of NUMBERS) {
-        const id = `${color}_${fill}_${shape}_${number}`;
-        const card = { color, fill, shape, number, id };
-        DECK.push(card);
+
+const shuffledDeck = () => {
+  const DECK = [];
+
+  for (const color of COLORS) {
+    for (const fill of FILLS) {
+      for (const shape of SHAPES) {
+        for (const number of NUMBERS) {
+          const id = `${color}_${fill}_${shape}_${number}`;
+          const card = { color, fill, shape, number, id };
+          DECK.push(card);
+        }
       }
     }
   }
-}
 
-const SHUFFLED_DECK = shuffle(DECK);
+  return shuffle(DECK);
+}
 
 /** Check if all values are the same */
 const isAllSame = values => {
@@ -60,4 +63,4 @@ const isSet = cards => {
   return true;
 };
 
-export { SHUFFLED_DECK, isAllSame, isAllDifferent, isSet };
+export { shuffledDeck, isAllSame, isAllDifferent, isSet };

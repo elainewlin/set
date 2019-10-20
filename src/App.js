@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./components/Card";
 import "./styles/App.css";
-import { SHUFFLED_DECK, isSet } from "./Set";
+import { shuffledDeck, isSet } from "./Set";
 import { includes, remove } from "lodash";
 
 const CARDS_ON_TABLE = 12;
@@ -19,24 +19,37 @@ class App extends React.Component {
     this.state = {
       selected: [], // User selected
       highlighted: [], // Computer finds a set
-      deck: SHUFFLED_DECK,
+      deck: [],
       table: [],
       message: null
     };
+    this.baseState = this.state;
+
     this.selectCard = this.selectCard.bind(this);
     this.findSet = this.findSet.bind(this);
     this.flipMoreCards = this.flipMoreCards.bind(this);
+    this.newGame = this.newGame.bind(this);
+  }
+
+  setupBoard() {
+    const deck = shuffledDeck();
+    const table = deck.slice(0, CARDS_ON_TABLE);
+    this.setState({ table: table });
+
+    const remainingDeck = deck.slice(
+      CARDS_ON_TABLE,
+      deck.length
+    );
+    this.setState({ deck: remainingDeck });
   }
 
   componentDidMount() {
-    const table = this.state.deck.slice(0, CARDS_ON_TABLE);
-    this.setState({ table: table });
+    this.setupBoard();
+  }
 
-    const remainingDeck = this.state.deck.slice(
-      CARDS_ON_TABLE,
-      this.state.deck.length
-    );
-    this.setState({ deck: remainingDeck });
+  newGame() {
+    this.setState(this.baseState);
+    this.setupBoard();
   }
 
   replaceSelected(selected) {
@@ -144,13 +157,16 @@ class App extends React.Component {
       table.push(newCard);
     }
 
-    this.setState({ table, deck });
+    this.setState({ table, deck, message: null });
   }
 
   render() {
     return (
       <div className="App">
         <div className="Sidebar">
+          <button className="Button" onClick={this.newGame}>
+            New Game
+          </button>
           <button className="Button" onClick={this.findSet}>
             Find Set
           </button>
