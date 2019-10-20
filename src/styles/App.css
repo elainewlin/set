@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 8px;
+  margin: 8px;
 }
 
 .Button {
@@ -16,7 +17,7 @@
   border-radius: 4px;
   color: #FFFFFF;
   background-color: #008CBA;
-  margin: 8px;
+  margin-bottom: 8px;
 }
 
 .Button:hover {

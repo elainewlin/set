@@ -161,6 +161,7 @@ class App extends React.Component {
   }
 
   render() {
+    const {deck} = this.state;
     return (
       <div className="App">
         <div className="Sidebar">
@@ -173,6 +174,9 @@ class App extends React.Component {
           <button className="Button" onClick={this.flipMoreCards}>
             Flip More Cards
           </button>
+          <div>
+            Cards in deck: {deck.length}
+          </div>
         </div>
         <div className="RightPanel">
           <div className="Grid">
