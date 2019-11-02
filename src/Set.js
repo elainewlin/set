@@ -4,6 +4,12 @@ import { shuffle } from "lodash";
 
 const PROPERTIES = ["color", "fill", "shape", "number"];
 
+const createCard = (params) => {
+  const {color, fill, shape, number} = params;
+  const id = `${color}_${fill}_${shape}_${number}`;
+  return { color, fill, shape, number, id };
+}
+
 const shuffledDeck = () => {
   const DECK = [];
 
@@ -11,8 +17,7 @@ const shuffledDeck = () => {
     for (const fill of FILLS) {
       for (const shape of SHAPES) {
         for (const number of NUMBERS) {
-          const id = `${color}_${fill}_${shape}_${number}`;
-          const card = { color, fill, shape, number, id };
+          const card = createCard({color, fill, shape, number});
           DECK.push(card);
         }
       }
@@ -63,4 +68,10 @@ const isSet = cards => {
   return true;
 };
 
-export { shuffledDeck, isAllSame, isAllDifferent, isSet };
+export { 
+  createCard,
+  shuffledDeck,
+  isAllSame,
+  isAllDifferent,
+  isSet
+};

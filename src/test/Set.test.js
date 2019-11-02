@@ -1,7 +1,15 @@
-import {isAllSame,
+import {
+  createCard,
+  isAllSame,
   isAllDifferent,
-  isSet} from "../Set";
-import {COLORS} from "../constants"
+  isSet
+} from "../Set";
+import {
+  COLORS,
+  FILLS,
+  SHAPES,
+  NUMBERS
+} from "../constants"
 import assert from "assert";
 
 describe("isAllSame", () => {
@@ -42,7 +50,50 @@ describe("isAllDifferent", () => {
   })
 })
 
-describe("isSet", () => {
+describe.only("isSet", () => {
+  it("returns true when there's a set", () => {
+    const card1 = createCard({
+      color: COLORS[0],
+      fill: FILLS[0],
+      shape: SHAPES[0],
+      number: NUMBERS[0]
+    });
+    const card2 = createCard({
+      color: COLORS[0],
+      fill: FILLS[2],
+      shape: SHAPES[0],
+      number: NUMBERS[1]
+    });
+    const card3 = createCard({
+      color: COLORS[0],
+      fill: FILLS[1],
+      shape: SHAPES[0],
+      number: NUMBERS[2]
+    });
+    const group = [card1, card2, card3];
+    assert.equal(isSet(group), true);
+  });
 
-
+  it("returns false when there's no set", () => {
+    const card1 = createCard({
+      color: COLORS[0],
+      fill: FILLS[0],
+      shape: SHAPES[0],
+      number: NUMBERS[0]
+    });
+    const card2 = createCard({
+      color: COLORS[0],
+      fill: FILLS[2],
+      shape: SHAPES[0],
+      number: NUMBERS[1]
+    });
+    const card3 = createCard({
+      color: COLORS[0],
+      fill: FILLS[2],
+      shape: SHAPES[0],
+      number: NUMBERS[2]
+    });
+    const group = [card1, card2, card3];
+    assert.equal(isSet(group), false);
+  });
 });
