@@ -16,7 +16,7 @@ class Card extends React.Component {
   getShapes() {
     const {number, color, fill, shape} = this.props.card;
     const image = `${shape}_${fill}_${color}`
-    const url = `/assets/${image}.png`;
+    const url = `/assets/${image}.svg`;
     const shapes = [];
     for (let i = 0; i < number; i++) {
       const key = `${url}_${i}`
