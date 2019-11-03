@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "//elainewlin.github.io/set/static/css/main.634fd6dc.chunk.css",
+    "main.js": "//elainewlin.github.io/set/static/js/main.5b1c9bf4.chunk.js",
+    "main.js.map": "//elainewlin.github.io/set/static/js/main.5b1c9bf4.chunk.js.map",
+    "runtime-main.js": "//elainewlin.github.io/set/static/js/runtime-main.dc8f3e52.js",
+    "runtime-main.js.map": "//elainewlin.github.io/set/static/js/runtime-main.dc8f3e52.js.map",
+    "static/js/2.d4e51034.chunk.js": "//elainewlin.github.io/set/static/js/2.d4e51034.chunk.js",
+    "static/js/2.d4e51034.chunk.js.map": "//elainewlin.github.io/set/static/js/2.d4e51034.chunk.js.map",
+    "index.html": "//elainewlin.github.io/set/index.html",
+    "precache-manifest.7a090983032c932c19a0885833ecd5f4.js": "//elainewlin.github.io/set/precache-manifest.7a090983032c932c19a0885833ecd5f4.js",
+    "service-worker.js": "//elainewlin.github.io/set/service-worker.js",
+    "static/css/main.634fd6dc.chunk.css.map": "//elainewlin.github.io/set/static/css/main.634fd6dc.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dc8f3e52.js",
+    "static/js/2.d4e51034.chunk.js",
+    "static/css/main.634fd6dc.chunk.css",
+    "static/js/main.5b1c9bf4.chunk.js"
+  ]
+}
